@@ -150,7 +150,7 @@
     z-index: 2;
   }
 
-  /* Floating hearts */
+  /* Floating roses */
   .hearts-container {
     position: fixed;
     top: 0; left: 0;
@@ -162,23 +162,23 @@
   .floating-heart {
     position: absolute;
     font-size: 1.5rem;
-    animation: floatUp linear infinite;
+    animation: floatUpRose linear infinite;
     opacity: 0.7;
   }
 
-  @keyframes floatUp {
+  @keyframes floatUpRose {
     0% {
-      transform: translateY(110vh) rotate(0deg) scale(0.5);
+      transform: translateY(110vh) rotate(0deg) scale(0.4);
       opacity: 0;
     }
     10% {
-      opacity: 0.8;
+      opacity: 0.9;
     }
     90% {
-      opacity: 0.6;
+      opacity: 0.7;
     }
     100% {
-      transform: translateY(-10vh) rotate(360deg) scale(1.2);
+      transform: translateY(-10vh) rotate(720deg) scale(1.3);
       opacity: 0;
     }
   }
@@ -210,14 +210,18 @@
 <!-- ==================== Page 1 ==================== -->
 <div id="page1" class="page">
   <div class="sparkles" id="sparkles"></div>
-  <p class="blink-text">💗 点击领取你的<br>520专属男友 💗</p>
+  <p class="blink-text">🌹 点击领取你的<br>520专属男友 🌹</p>
   <button class="btn-claim" onclick="goToPage2()">点 击 领 取</button>
 </div>
 
 <!-- ==================== Page 2 ==================== -->
+<audio id="bgm" preload="auto" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <div id="page2" class="page">
   <div class="hearts-container" id="hearts"></div>
-  <p class="page2-title">✨ 你的520专属男友 ✨</p>
+  <p class="page2-title">🌹 你的520专属男友 🌹</p>
   <img src="1.jpg" style="width: clamp(240px, 60vw, 340px); height: auto; border-radius: 20px; box-shadow: 0 10px 40px rgba(255,20,147,0.3);">
   <button class="btn-back" onclick="goToPage1()">← 返回</button>
 </div>
@@ -239,7 +243,7 @@ for (let i = 0; i < 25; i++) {
 
 // ========== Floating hearts on Page 2 ==========
 const heartsEl = document.getElementById('hearts');
-const heartEmojis = ['💕', '💖', '💗', '💝', '💘', '🩷', '💓', '💞'];
+const heartEmojis = ['🌹', '🥀', '🌷', '💐', '🏵️', '🌸', '💮', '🌺', '🌻', '🌼'];
 
 function createHeart() {
   const heart = document.createElement('span');
@@ -265,6 +269,12 @@ setInterval(createHeart, 800);
 function goToPage2() {
   document.getElementById('page1').classList.add('hidden');
   document.getElementById('page2').classList.add('active');
+  // 播放背景音乐
+  const bgm = document.getElementById('bgm');
+  if (bgm) {
+    bgm.currentTime = 0;
+    bgm.play().catch(e => console.log('音乐播放失败:', e));
+  }
 }
 
 function goToPage1() {
